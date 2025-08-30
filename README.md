@@ -33,7 +33,7 @@ After importing the dataset, I checked the first few rows using .head() to confi
 - Dropped games released before 2010 to reduce noise from outdated platforms and ensure analysis focuses on more recent, comparable data.
 - Filled missing values in Critic_Score and User_Score columns with the mean of each respective column.
 
-These modifications resulted in data looking like this
+After cleaning, the dataset looked like this:
 
 |    | Name                           | Platform   |   Year_of_Release | Genre        |   Critic_Score |   User_Score | Rating   |   Sales_Total |
 |---:|:-------------------------------|:-----------|------------------:|:-------------|---------------:|-------------:|:---------|--------------:|
@@ -45,7 +45,7 @@ These modifications resulted in data looking like this
 
 ## Exploratory Data Analysis (EDA)
 
-### 1. Aggregating data to create a chart showing number of games of different genres released per year, starting from 2010.
+### 1. Games released per genre per year (2010–2016)
 
 **Steps**
 1) Created a copy of the dataset.
@@ -60,7 +60,7 @@ These modifications resulted in data looking like this
 - Small uptrend seen on Shooter games last year.
 - Least amount of released games are in Puzzle genre.
 
-### 2. Aggregating data to see the best combinations of Platform/Genre according to the critic scores.
+### 2. Best Platform/Genre combinations (Critic Scores)
 
 **Steps**
 1) Created a copy of the dataset.
@@ -76,11 +76,11 @@ These modifications resulted in data looking like this
 - Lowest score is the Simulation/WiiU combination.
 - Also critics scored highly games in Sports/PC, Role-Playing/PC, Role-Playing/XOne combinations.
 
-### 3. Aggregating data to see the best combinations of Platform/Genre according to the users scores.
+### 3. Best Platform/Genre combinations (User Scores)
 
 **Steps**
 1) Created a copy of the dataset.
-2) Since critic scores are double-digit, while user scores were single-digit, used lambda function to multiply user scores by 10 and make it look more similar to critic score format.
+2) Since critic scores are double-digit, while user scores were single-digit, applied a lambda function to multiply user scores by 10 and make it look more similar to critic score format.
 3) Grouping by 'Platform' and 'Genre' while filling out the combinations with mean of each combination.
 4) Creating a pivot table.
 5) Due to lack of data on some Platform/Genre combinations NaN cells were filled with 0.
@@ -93,7 +93,7 @@ These modifications resulted in data looking like this
 - Lowest score is the Simulation/WiiU combination.
 - Also users scored highly games in Shooter/PS2, Racing/WiiU combinations.
 
-### 4. Aggregating data to see the best combinations of Platform/Genre according to the total number of sales.
+### 4. Sales by Platform/Genre combinations
 
 **Steps**
 1) Created a copy of the dataset.
@@ -109,7 +109,7 @@ These modifications resulted in data looking like this
 - Lowest sales are in Role-Playing/PS2 and Puzzle/PS4 both showing only 0.02.
 - Overall high sales also noticed in Shooter/X360, Action/X360 and Shooter/PS3 combinations.
 
-### 5. Aggregating data to see the most popular platforms overall based on number of games released on them.
+### 5. Most popular platforms overall
 
 **Steps**
 1) Created a copy of the dataset with only 'Platform' column.
@@ -123,7 +123,7 @@ These modifications resulted in data looking like this
 - PS2 has the least amount of games released.
 - This data however may be not useful due to changes of platform popularity over time.
 
-### 6. Aggregating data to see the popularity of platforms over the years.
+### 6. Platform popularity over time
 
 **Steps**
 1) Created a copy of the dataset.
@@ -137,7 +137,7 @@ These modifications resulted in data looking like this
 - Even though XOne was released practically at the same time as PS4, it is gaining popularity much slower than PS4.
 - DS, Wii and PSP were in the downtrend throughout the whole review period.
 
-### 7. Since our task involves analyzing trends for next year, number of games released per genre summarized to 2016 period (previous year).
+### 7. Games released by genre in 2016
 
 **Steps**
 1) Created a copy of dataset.
@@ -152,16 +152,19 @@ These modifications resulted in data looking like this
 - 10% of games were in Sports genre.
 - Rest of genres were less than 10% in 2016 releases.
 
-### 8. Overall findings using the EDA above.
+### 8. Key Findings
 
 - Both critics and users have same platform/genre combinations for the highest and lowest scores. 
 - Besides the highest/lowest scores however scores are different between critics and users.
-- Even though lowest sales are in Puzzle/PS4 combination it does not stop it from being the highest scored combination by both critics and users. This may coincide to fact that according to EDA 1 pullze has least amount of game releases, which may be the reason sales overall are low even with the high rating.
-- Even though last year Action games are in a downtrend, there is still much more Action games being released which brings high sales numbers on most of the platforms.
+- Even though lowest sales are in Puzzle/PS4 combination it does not stop it from being the highest scored combination by both critics and users. This may be due to the fact that according to EDA 1 puzzle has least amount of game releases, which may be the reason sales overall are low even with the high rating.
+- Although Action games showed a decline in 2016, they still dominate in number of releases.
 
-## Data quality
+## Data Limitations
 - There is no information on the source of critics or users scores.
-- No clear indication of sales units.
+- Sales are given in millions of units, but not explicitly documented in the dataset.
 - Data goes as far as to 2016 which is overall outdated.
+
+## Conclusion
+The analysis highlights that Action games dominate in terms of volume and sales, while Puzzle games, though less common, achieve the highest review scores. Platform trends show the rise of PS4 and decline of older consoles such as Wii and DS. These insights can help predict future market directions and support decisions in marketing and game development.
 
 Data: outputs/games.csv
