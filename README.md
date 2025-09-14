@@ -152,10 +152,10 @@ After cleaning, the dataset looked like this:
 
 **Result**
 <img width="3302" height="1860" alt="total_sales_by_genre_and_platform" src="https://github.com/user-attachments/assets/608a2c73-5ba9-4762-8fe8-914def6d8167" />
-<img width="3302" height="1860" alt="eu_sales_by_genre_and_platform" src="https://github.com/user-attachments/assets/cd357f24-2537-402c-a6c2-30b12b0fe7ae" />
-<img width="3302" height="1860" alt="oth_sales_by_genre_and_platform" src="https://github.com/user-attachments/assets/603ad746-f7fa-4562-82a5-d679d50259d4" />
 <img width="3302" height="1860" alt="na_sales_by_genre_and_platform" src="https://github.com/user-attachments/assets/ab3b412e-a2be-4c1e-8ac4-71c904444ae9" />
+<img width="3302" height="1860" alt="eu_sales_by_genre_and_platform" src="https://github.com/user-attachments/assets/cd357f24-2537-402c-a6c2-30b12b0fe7ae" />
 <img width="3302" height="1860" alt="jp_sales_by_genre_and_platform" src="https://github.com/user-attachments/assets/15868ecf-0f74-41a2-bc30-239bfe1e49a2" />
+<img width="3302" height="1860" alt="oth_sales_by_genre_and_platform" src="https://github.com/user-attachments/assets/603ad746-f7fa-4562-82a5-d679d50259d4" />
 
 **Findings**
 
