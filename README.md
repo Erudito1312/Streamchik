@@ -227,4 +227,4 @@ Other regions:
 - Sales are weakly connected to scores, suggesting factors like marketing, platform popularity, and brand recognition drive success more than reviews.
 - Platform differences matter: Japan favors RPG titles, North America favors shooters, while Europe and global sales are led by Action games.
 
-Data: outputs/games.csv
+Data: data/games.csv
