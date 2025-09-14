@@ -4,7 +4,7 @@
 You work at the online store “Streamchik”, which sells computer games worldwide. From open sources you have historical data on game sales, user and critic reviews, genres, and platforms (for example, Xbox or PlayStation). Your task is to identify patterns that determine a game’s success. This will make it possible to bet on potentially popular products and plan advertising campaigns.
 
 ## Data inspection
-After importing the dataset, I checked the first few rows using .head() to confirm the structure. The dataset has the following columns:
+After importing the dataset, I checked the first few rows using .head() and .describe() to confirm the structure. The dataset has the following columns:
 
 - **Name** – games title 
 - **Platform** – gaming platform (e.g., PC, PlayStation Vita, Xbox 360) 
@@ -29,31 +29,36 @@ After importing the dataset, I checked the first few rows using .head() to confi
 |  4 | Pokemon Red/Pokemon Blue | GB         |              1996 | Role-Playing |      11.27 |       8.89 |      10.22 |          1    |            nan |        nan   | nan      |
 
 ## Data cleaning and modifying
-- Since the task does not require details on sales per jurisdiction I decided to combine the sales into a single column 'Sales_Total'.
-- Dropped games released before 2010 to reduce noise from outdated platforms and ensure analysis focuses on more recent, comparable data.
-- Filled missing values in Critic_Score and User_Score columns with the mean of each respective column.
+- Checked the list of platforms present in the dataset, and removed the ones released before 2010 due to them being too outdated (legacy).
+- Found the games in dataset that were missing their release year, and filled it out manually using public domain data.
+- Created a new column 'Sales_Total' which is a combination of sales across all regions.
+- Dropped games released before 2010 to reduce noise from outdated data and ensure analysis focuses on more recent, comparable information.
+- Since critic scores were 1-100 but user scores were 1-10, multiplied User_Score column to be in line with Critic_Score format.
+- Confirmed that Critic_Score is in numeric format.
+- There is no need to remove the missing data of critic and user scores. Part of the games were released too recently to have scores, and overall modifying the missing scores can alter the end data.
 
 After cleaning, the dataset looked like this:
 
-|    | Name                           | Platform   |   Year_of_Release | Genre        |   Critic_Score |   User_Score | Rating   |   Sales_Total |
-|---:|:-------------------------------|:-----------|------------------:|:-------------|---------------:|-------------:|:---------|--------------:|
-| 14 | Kinect Adventures!             | X360       |              2010 | Misc         |             61 |          6.3 | E        |         21.82 |
-| 16 | Grand Theft Auto V             | PS3        |              2013 | Action       |             97 |          8.2 | M        |         21.05 |
-| 23 | Grand Theft Auto V             | X360       |              2013 | Action       |             97 |          8.1 | M        |         16.27 |
-| 27 | Pokemon Black/Pokemon White    | DS         |              2010 | Role-Playing |             70 |          7   | nan      |         15.13 |
-| 29 | Call of Duty: Modern Warfare 3 | X360       |              2011 | Shooter      |             88 |          3.4 | M        |         14.73 |
+|    | Name                                      | Platform   |   Year_of_Release | Genre        |   NA_sales |   EU_sales |   JP_sales |   Other_sales |   Critic_Score |   User_Score | Rating   |   Sales_Total |
+|---:|:------------------------------------------|:-----------|------------------:|:-------------|-----------:|-----------:|-----------:|--------------:|---------------:|-------------:|:---------|--------------:|
+| 31 | Call of Duty: Black Ops 3                 | PS4        |              2015 | Shooter      |       6.03 |       5.86 |       0.36 |          2.38 |            nan |          nan | nan      |         14.63 |
+| 33 | Pokemon X/Pokemon Y                       | 3DS        |              2013 | Role-Playing |       5.28 |       4.19 |       4.35 |          0.78 |            nan |          nan | nan      |         14.6  |
+| 40 | Mario Kart 7                              | 3DS        |              2011 | Racing       |       5.03 |       4.02 |       2.69 |          0.91 |             85 |           82 | E        |         12.65 |
+| 42 | Grand Theft Auto V                        | PS4        |              2014 | Action       |       3.96 |       6.31 |       0.38 |          1.97 |             97 |           83 | M        |         12.62 |
+| 47 | Pokemon Omega Ruby/Pokemon Alpha Sapphire | 3DS        |              2014 | Role-Playing |       4.35 |       3.49 |       3.1  |          0.74 |            nan |          nan | nan      |         11.68 |
 
 ## Exploratory Data Analysis (EDA)
 
 ### 1. Games released per genre per year (2010–2016)
 
 **Steps**
-1) Created a copy of the dataset.
+1) Created year_genre_count dataset containing 'Year_of_Release' and 'Genre' columns.
 2) Transformed it into a pivot table with index = 'Year_of_Release', columns = 'Genre'.
 3) Created a line plot using the pivot table
 
 **Result**
-<img width="3413" height="1629" alt="genre_releases_per_year" src="https://github.com/user-attachments/assets/9c755f0e-4b0e-4127-8546-487944067b3d" />
+
+
 
 **Findings**
 - Far more action games are being released, even though last year action games are in a down-trend.
@@ -69,7 +74,7 @@ After cleaning, the dataset looked like this:
 4) Due to lack of data on some Platform/Genre combinations NaN cells were filled with 0.
 
 **Result**
-<img width="3302" height="1860" alt="average critic score per platform" src="https://github.com/user-attachments/assets/eeba595f-33ef-4df4-a12f-01f33eca6b31" />
+
 
 **Findings**
 - Highest score is the Puzzle/PS4 combination.
@@ -86,7 +91,7 @@ After cleaning, the dataset looked like this:
 5) Due to lack of data on some Platform/Genre combinations NaN cells were filled with 0.
 
 **Result**
-<img width="3302" height="1860" alt="average user score per platform" src="https://github.com/user-attachments/assets/5d834d72-4ca0-4c5f-a6a0-cf9c5d911084" />
+
 
 **Findings**
 - Highest score is the Puzzle/PS4 combination.
@@ -102,7 +107,7 @@ After cleaning, the dataset looked like this:
 4) Due to lack of data on some Platform/Genre combinations NaN cells were filled with 0.
 
 **Result**
-<img width="3325" height="1860" alt="Total sales by genre and platform" src="https://github.com/user-attachments/assets/89cfb7b4-3ff1-4fb5-9e80-a19934c2f5ca" />
+
 
 **Findings**
 - Highest sales are in Action/PS3 combination.
@@ -116,7 +121,7 @@ After cleaning, the dataset looked like this:
 2) Applied value_counts method.
 
 **Result**
-<img width="2538" height="1629" alt="Total games released by platform" src="https://github.com/user-attachments/assets/c83300e5-62ba-4171-bfcd-081c0c567715" />
+
 
 **Findings**
 - PS3 is in the lead, X360 is close second.
@@ -130,7 +135,6 @@ After cleaning, the dataset looked like this:
 2) Created a pivot table with index = 'Year_of_Release', columns = 'Platform' and values = 'count'.
 
 **Result**
-<img width="3413" height="1629" alt="Popularity of platforms over the years" src="https://github.com/user-attachments/assets/cee45ef2-937a-4fbc-b223-16e33bcfc6e4" />
 
 **Findings**
 - Platform gaining the most popularity is PS4 which makes sense with it being the newest one.
@@ -144,7 +148,6 @@ After cleaning, the dataset looked like this:
 2) Applied value_counts method.
 
 **Result**
-<img width="1420" height="1229" alt="Total games per genre released in 2016" src="https://github.com/user-attachments/assets/cdcdcbb6-bf93-4561-8306-2ba5a0d724cb" />
 
 **Findings**
 - 35% of games released in 2016 were of Action genre.
