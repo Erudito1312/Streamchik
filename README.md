@@ -57,110 +57,165 @@ After cleaning, the dataset looked like this:
 3) Created a line plot using the pivot table
 
 **Result**
-
-
+<img width="3413" height="1629" alt="genre_releases_per_year" src="https://github.com/user-attachments/assets/b40857d4-6086-484c-a449-39e56fe2c3ae" />
 
 **Findings**
-- Far more action games are being released, even though last year action games are in a down-trend.
-- Small uptrend seen on Shooter games last year.
+- Far more action games released, even though last year action games are in a down-trend.
+- Small uptrend seen on Shooter and Adventure games last year.
 - Least amount of released games are in Puzzle genre.
 
-### 2. Best Platform/Genre combinations (Critic Scores)
+### 2. Number of sales per platform
 
 **Steps**
-1) Created a copy of the dataset.
-2) Grouping by 'Platform' and 'Genre' while filling out the combinations with mean of each combination.
-3) Creating a pivot table.
-4) Due to lack of data on some Platform/Genre combinations NaN cells were filled with 0.
+1) Created sales_yearly dataset containing 'Year_of_Release', 'Platform' and 'Sales_Total' columns.
+2) Transformed it into a pivot table with index = 'Year_of_Release', columns = 'Platform' and values = 'Sales_Total'.
+3) Created a line plot using the pivot table
 
 **Result**
-
+<img width="3413" height="1629" alt="sales_per_platform_per_year" src="https://github.com/user-attachments/assets/aed81942-7b5e-4920-906a-83440de268c9" />
 
 **Findings**
-- Highest score is the Puzzle/PS4 combination.
-- Lowest score is the Simulation/WiiU combination.
-- Also critics scored highly games in Sports/PC, Role-Playing/PC, Role-Playing/XOne combinations.
+- PS4 and Xbox One are in the uptrend, which is expected as they are the newest platforms.
+- PS4 is far in the lead doubling the sale numbers of Xbox One.
+- Rest of platforms in downtrend.
 
-### 3. Best Platform/Genre combinations (User Scores)
+### 3. Best Platform/Genre combinations (Critic Scores)
 
 **Steps**
-1) Created a copy of the dataset.
-2) Since critic scores are double-digit, while user scores were single-digit, applied a lambda function to multiply user scores by 10 and make it look more similar to critic score format.
-3) Grouping by 'Platform' and 'Genre' while filling out the combinations with mean of each combination.
-4) Creating a pivot table.
-5) Due to lack of data on some Platform/Genre combinations NaN cells were filled with 0.
+1) Created avg_critic_score_by_platform dataset containing 'Platform', 'Genre' and 'Critic_Score' columns.
+2) Grouped by 'Platform' and 'Genre' while filling out the combinations with mean of each combination.
+3) Created a pivot table.
+4) Created a heatmap.
 
 **Result**
-
+<img width="3302" height="1860" alt="average_critic_score_by_genre_and_platform" src="https://github.com/user-attachments/assets/81154cac-dfe1-4c1a-91e1-7b5e84620b64" />
 
 **Findings**
-- Highest score is the Puzzle/PS4 combination.
-- Lowest score is the Simulation/WiiU combination.
-- Also users scored highly games in Shooter/PS2, Racing/WiiU combinations.
+- Highest score is the Puzzle/PS4 and Racing/WiiU combinations.
+- Lowest score is the Adventure/WiiU combination.
 
-### 4. Sales by Platform/Genre combinations
+### 4. Best Platform/Genre combinations (User Scores)
 
 **Steps**
-1) Created a copy of the dataset.
-2) Dropped columns 'Name', 'Year_of_Release', 'Critic_Score', 'User_Score', 'Rating'.
-3) Grouped by 'Platform' and 'Genre' while summarizing the resulted combinations.
-4) Due to lack of data on some Platform/Genre combinations NaN cells were filled with 0.
+1) Created avg_user_score_by_platform dataset containing 'Platform', 'Genre' and 'User_Score' columns.
+2) Grouped by 'Platform' and 'Genre' while filling out the combinations with mean of each combination.
+3) Created a pivot table.
+4) Created a heatmap.
 
 **Result**
-
+<img width="3302" height="1860" alt="average_user_score_per_genre_and_platform" src="https://github.com/user-attachments/assets/fa892537-e34e-4d2c-abb3-1490543ac62f" />
 
 **Findings**
-- Highest sales are in Action/PS3 combination.
-- Lowest sales are in Role-Playing/PS2 and Puzzle/PS4 both showing only 0.02.
-- Overall high sales also noticed in Shooter/X360, Action/X360 and Shooter/PS3 combinations.
+- Highest score is the Racing/WiiU combination.
+- Lowest score is the Strategy/PSV combination.
 
-### 5. Most popular platforms overall
+### 5. Comparing critic and user scores based on platforms
 
 **Steps**
-1) Created a copy of the dataset with only 'Platform' column.
-2) Applied value_counts method.
+1) Created comp_scores dataset containing 'Platform', 'Critic_Score' and 'User_Score' columns.
+2) Converted table into long format using .melt().
+3) Created boxplot chart.
 
 **Result**
-
+<img width="1701" height="1351" alt="critic_vs_user_scores" src="https://github.com/user-attachments/assets/d5377af5-308c-4e06-94ef-23d8ab0bfb27" />
 
 **Findings**
-- PS3 is in the lead, X360 is close second.
-- PS2 has the least amount of games released.
-- This data however may be not useful due to changes of platform popularity over time.
+- Critic and user scores have similar distributions across platforms, though users tend to be more varied and sometimes harsher (e.g., PC).
 
-### 6. Platform popularity over time
+### 6. Correlation between critic/user scores and sales by platform.
 
 **Steps**
-1) Created a copy of the dataset.
-2) Created a pivot table with index = 'Year_of_Release', columns = 'Platform' and values = 'count'.
+1) Created a filtered dataset for each separate platform.
+2) Removed empty values.
+3) Created scatter matrix.
 
 **Result**
+<img width="2274" height="2314" alt="correlation_wiiu" src="https://github.com/user-attachments/assets/76475b21-3940-40d1-ac92-5a169bd4944e" />
+<img width="2301" height="2323" alt="correlation_psv" src="https://github.com/user-attachments/assets/6582cc0f-4c7d-4212-ba3d-3ea26b6e0f37" />
+<img width="2274" height="2314" alt="correlation_ps4" src="https://github.com/user-attachments/assets/e1808aea-f7f0-4309-89c2-6a3726c64c4f" />
+<img width="2274" height="2314" alt="correlation_pc" src="https://github.com/user-attachments/assets/17c55c15-17d0-40a9-a5a1-24ad225830c4" />
+<img width="2274" height="2314" alt="correlation_3ds" src="https://github.com/user-attachments/assets/5ef3c6d1-d5f7-43d0-98db-1ea7563cb404" />
+<img width="2274" height="2314" alt="correlation_xone" src="https://github.com/user-attachments/assets/b4f702f9-a521-446a-9613-7fdfd8402668" />
 
 **Findings**
-- Platform gaining the most popularity is PS4 which makes sense with it being the newest one.
-- Even though XOne was released practically at the same time as PS4, it is gaining popularity much slower than PS4.
-- DS, Wii and PSP were in the downtrend throughout the whole review period.
+- Overall, there is a moderate positive correlation between critic and user scores.
+- It is stronger on some platforms, for example on 3DS, PSV, and WiiU critics and players tend to agree more.
+- Correlation between critic scores and sales is relatively low across platforms.
+- Mostly minimal correlation between user scores and sales. The only notable exception is WiiU (≈ 0.39).
 
-### 7. Games released by genre in 2016
+### 7. Best combinations of Platform/Genre according to the total sales number overall and per region.
 
 **Steps**
-1) Created a copy of dataset.
-2) Applied value_counts method.
+1) Created a filtered dataset for each region and overall.
+2) Grouped by 'Platform' and 'Genre'
+3) Created a pivot table with index = 'Genre', columns = 'Platform' and values = 'Sales_Total'.
 
 **Result**
+<img width="3302" height="1860" alt="total_sales_by_genre_and_platform" src="https://github.com/user-attachments/assets/608a2c73-5ba9-4762-8fe8-914def6d8167" />
+<img width="3302" height="1860" alt="eu_sales_by_genre_and_platform" src="https://github.com/user-attachments/assets/cd357f24-2537-402c-a6c2-30b12b0fe7ae" />
+<img width="3302" height="1860" alt="oth_sales_by_genre_and_platform" src="https://github.com/user-attachments/assets/603ad746-f7fa-4562-82a5-d679d50259d4" />
+<img width="3302" height="1860" alt="na_sales_by_genre_and_platform" src="https://github.com/user-attachments/assets/ab3b412e-a2be-4c1e-8ac4-71c904444ae9" />
+<img width="3302" height="1860" alt="jp_sales_by_genre_and_platform" src="https://github.com/user-attachments/assets/15868ecf-0f74-41a2-bc30-239bfe1e49a2" />
 
 **Findings**
-- 35% of games released in 2016 were of Action genre.
-- Adventure and Role-Playing were 11% each.
-- 10% of games were in Sports genre.
-- Rest of genres were less than 10% in 2016 releases.
+
+Overall:
+
+- Best sales overall are seen in Action/PS4, over 96 million units.
+- Second is Shooter/PS4, over 88 million units.
+- Lowest number is Puzzle/PS4, with only 20,000 units sold.
+
+North America:
+
+- Highest sales are Shooter/XOne, over 36 million units.
+- Action/PS4 and Shooter/PS4 each sold over 32 million units.
+- Lowest sales are Simulation/PSV and Fighting/PC, 10,000 units each.
+
+Europe:
+
+- Highest sales are Action/PS4, over 42 million units.
+- Shooter/PS4 is second with 39 million units.
+- Lowest sales are Simulation/PSV, less than 10,000 sales.
+
+Japan:
+
+- Highest sales are Role-Playing/3DS, over 41 million units.
+- Action/3DS is second with 22 million units.
+- Rest of combinations showed relatively low sales.
+
+Other regions:
+
+- Highest sales are Action/PS4, over 14 million units.
+- Shooter/PS4 is second with 13 million units.
+- Rest of combinations showed relatively low sales.
 
 ### 8. Key Findings
 
-- Both critics and users have same platform/genre combinations for the highest and lowest scores. 
-- Besides the highest/lowest scores however scores are different between critics and users.
-- Even though lowest sales are in Puzzle/PS4 combination it does not stop it from being the highest scored combination by both critics and users. This may be due to the fact that according to EDA 1 puzzle has least amount of game releases, which may be the reason sales overall are low even with the high rating.
-- Although Action games showed a decline in 2016, they still dominate in number of releases.
+1) Genre trends:
+   - Action genre dominated in term of releases, even though last year shows a decline.
+   - Shooter and Adventure games are showing small growth in the final year.
+   - Puzzle was the least released genre.
+     
+2) Platform/sales trends:
+   - PS4 led the sales, roughly double the number of Xbox One sales over the same period.
+   - Rest of the platforms are in decline.
+  
+3) Best Platform/Genre Combinations:
+   - By Critic Scores: Puzzle/PS4 and Racing/WiiU were the highest-rated. Adventure/WiiU scored the lowest.
+   - By User Scores: Racing/WiiU was the highest-rated. Strategy/PSV scored the lowest.
+   - Global Sales: Action/PS4 and Shooter/PS4 were best-sellers.
+   - North America: Shooter/XOne topped the charts.
+   - Europe: Action/PS4 led.
+   - Japan: Role-Playing/3DS dominated by a wide margin.
+   - Other regions: Action/PS4 again was strongest.
+  
+4) Critic vs. User Scores:
+   - Distributions are broadly similar across platforms, but users show more variation and can be harsher (especially on PC).
+
+5) Correlation Analysis:
+   - Critic/User Scores: Moderate positive correlation overall. Stronger on 3DS, PSV, and WiiU.
+   - Critic Scores/Sales: Generally low correlation — high reviews do not guarantee high sales.
+   - User Scores/Sales: Minimal correlation overall, with WiiU as an exception, where user sentiment had more influence.
 
 ## Data Limitations
 - There is no information on the source of critics or users scores.
@@ -168,6 +223,8 @@ After cleaning, the dataset looked like this:
 - Data goes as far as to 2016 which is overall outdated.
 
 ## Conclusion
-The analysis highlights that Action games dominate in terms of volume and sales, while Puzzle games, though less common, achieve the highest review scores. Platform trends show the rise of PS4 and decline of older consoles such as Wii and DS. These insights can help predict future market directions and support decisions in marketing and game development.
+- Critics and users mostly agree on game scores, even though players are more divided.
+- Sales are weakly connected to scores, suggesting factors like marketing, platform popularity, and brand recognition drive success more than reviews.
+- Platform differences matter: Japan favors RPG titles, North America favors shooters, while Europe and global sales are led by Action games.
 
 Data: outputs/games.csv
